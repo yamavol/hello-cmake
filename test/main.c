@@ -1,7 +1,6 @@
-#pragma once
-
 #include "harness.h"
 #include "hello.h"
+#include "cplusplus.h"
 
 static void test_harness(test_runner* runner)
 {
@@ -27,8 +26,10 @@ int main()
 
     test_harness(runner);
     test_unit_hello(runner);
+    test_build_cplusplus(runner);
 
     print_test_summary(runner);
+    
     result = is_test_ok(runner) ? 0 : 1;
     free_test_runner(runner);
     
