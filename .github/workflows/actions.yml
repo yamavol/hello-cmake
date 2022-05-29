@@ -39,7 +39,7 @@ jobs:
         ctest --test-dir build
     - name: Collect coverage and upload to codecov
       run: |
-        lcov -c -d build -o cov.info
+        lcov -c -d build/src -o cov.info
         bash <(curl -s https://codecov.io/bash) -f cov.info || echo "CodeCov did not collect repots"
 
   windows:
