@@ -22,13 +22,15 @@ static void test_unit_hello(test_runner* runner)
 
 int main()
 {
+    int result = 0;
     test_runner* runner = new_test_runner();
 
     test_harness(runner);
     test_unit_hello(runner);
 
     print_test_summary(runner);
+    result = is_test_ok(runner) ? 0 : 1;
     free_test_runner(runner);
     
-    return is_test_ok(runner) ? 0 : 1;
+    return result;
 }
