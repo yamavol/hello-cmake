@@ -21,3 +21,15 @@ jobs:
         cmake -B build .
         cmake --build build
         ctest --test-dir build
+
+  windows:
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build and test
+      run: |
+        cmake -B build .
+        cmake --build build --config Release
+        ctest --test-dir build -C Release
