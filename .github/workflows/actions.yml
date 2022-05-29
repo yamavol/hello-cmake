@@ -1,0 +1,23 @@
+name: GitHub actions
+on: [push]
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler:
+          - c: clang
+            cpp: clang++
+          - c: gcc
+            cpp: g++
+    env:
+      CC: ${{ matrix.compiler.c }}
+      CXX: ${{ matrix.compiler.cpp }}
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build and test
+      run: |
+        cmake -B build .
+        cmake --build build
+        ctest --test-dir build
