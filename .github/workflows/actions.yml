@@ -25,7 +25,6 @@ jobs:
   coverage:
     runs-on: ubuntu-latest
     env:
-      CMAKE_OPTIONS: -DENABLE_COVERAGE=ON
       CC: gcc
       CXX: g++  
     steps:
@@ -35,7 +34,7 @@ jobs:
         sudo apt-get install -y lcov
     - name: Build and test
       run: |
-        cmake -B build .
+        cmake -B build -DENABLE_COVERAGE=ON .
         cmake --build build
         ctest --test-dir build
     - name: Collect coverage and upload to codecov
