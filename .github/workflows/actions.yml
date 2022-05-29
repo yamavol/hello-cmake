@@ -24,9 +24,8 @@ jobs:
 
   coverage:
     runs-on: ubuntu-latest
-    strategy:
     env:
-      CMAKE_OPTIONS: -DENABLE_COVERAGE
+      CMAKE_OPTIONS: -DENABLE_COVERAGE=ON
       CC: gcc
       CXX: g++  
     steps:
