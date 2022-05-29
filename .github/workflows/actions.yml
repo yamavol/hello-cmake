@@ -22,6 +22,28 @@ jobs:
         cmake --build build
         ctest --test-dir build
 
+  coverage:
+    runs-on: ubuntu-latest
+    strategy:
+    env:
+      CMAKE_OPTIONS: -DENABLE_COVERAGE
+      CC: gcc
+      CXX: g++  
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install lcov
+      run: |
+        sudo apt-get install -y lcov
+    - name: Build and test
+      run: |
+        cmake -B build .
+        cmake --build build
+        ctest --test-dir build
+    - name: Collect coverage and upload to codecov
+      run: |
+        lcov -c -d build -o cov.info
+        bash <(curl -s https://codecov.io/bash) -f cov.info || echo "CodeCov did not collect repots"
+
   windows:
     runs-on: windows-latest
     strategy:
